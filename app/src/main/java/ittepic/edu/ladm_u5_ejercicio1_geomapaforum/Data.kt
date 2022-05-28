@@ -10,7 +10,7 @@ class Data {
 
     override fun toString(): String {
         return nombre + "\n" + posicion1.latitude + "," + posicion1.longitude + "\n"+
-                posicion2.latitude + "," + posicion2.longitude
+                posicion2.latitude + "," + posicion2.longitude +"\nImg: "+img.toString()
     }
 
     fun estoyEn(posicionActual: GeoPoint) : Boolean{
