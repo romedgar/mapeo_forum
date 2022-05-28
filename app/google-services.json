@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052602653049",
+    "project_id": "maps-d7ad4",
+    "storage_bucket": "maps-d7ad4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052602653049:android:bbfa2f0d78e774042f37a8",
+        "android_client_info": {
+          "package_name": "ittepic.edu.ladm_u5_ejercicio1_geomapaforum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052602653049-dd9p9gtbr5joqb274r883kgovs82mo9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoiYx-7OTZ4c8en_I_TsNPde6EXZDZrBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052602653049-dd9p9gtbr5joqb274r883kgovs82mo9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
