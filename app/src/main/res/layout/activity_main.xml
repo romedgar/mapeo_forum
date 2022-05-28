@@ -34,7 +34,7 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:visibility="invisible"
-        android:text="Presiona en la imagen para mas infromación"/>
+        android:text="Presiona en la imagen para más infromación"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
