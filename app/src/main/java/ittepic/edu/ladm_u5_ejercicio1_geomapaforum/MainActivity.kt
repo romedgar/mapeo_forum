@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         img_place.setImageResource(item.img)
         tv_title.setText(item.nombre)
-        
+
         builder.setView(v)
             .setPositiveButton("OK",
                 DialogInterface.OnClickListener { dialog, id ->
