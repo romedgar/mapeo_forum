@@ -43,7 +43,7 @@
         android:textColor="#0000FF"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Textview"/>
+        android:text=""/>
 
 </LinearLayout>
 
