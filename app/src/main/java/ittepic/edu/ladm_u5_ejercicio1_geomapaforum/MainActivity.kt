@@ -58,50 +58,16 @@ class MainActivity : AppCompatActivity() {
             posicion.clear()
             for (document in querySnapshot!!){
                 var data = Data()
-                Log.i("$$$",document.data.toString())
+                Log.i("$$$ 61",document.data.toString())
                 data.nombre = document.getString("nombre").toString()
                 data.posicion1 = document.getGeoPoint("posicion1")!!
                 data.posicion2 = document.getGeoPoint("posicion2")!!
+                data.descripcion = document.getString("descripcion")!!
                 resultado += data.toString()+"\n\n"
                 posicion.add(data)
             }
-                for(data in posicion){
-                    Log.i("data nombre", data.nombre)
-
-                    Log.i("img 77",data.img.toString())
-                }
-
                 Log.i("Resultado",resultado)
-            val cocina = Data()
-                cocina.nombre = "liverpool"
-                cocina.posicion1 = GeoPoint(21.530957052389336, -104.86747622842998)
-                cocina.posicion2 = GeoPoint(21.53085974568595, -104.86742258425228)
-            posicion.add(cocina)
-                val manglar = Data()
-                manglar.nombre = "play city"
-                manglar.posicion1 = GeoPoint(21.487919538312802, -104.89082201784667)
-                manglar.posicion2 = GeoPoint(21.487376397463212, -104.89030345339525)
-            posicion.add(manglar)
-                val sala = Data()
-                sala.nombre = "cinemex"
-                sala.posicion1 = GeoPoint(21.530923934946678, -104.86741319738981)
-                sala.posicion2 = GeoPoint(21.530797935199836, -104.86727506363225)
-            posicion.add(sala)
-                val calle = Data()
-                calle.nombre = "recorcholis"
-                calle.posicion1 = GeoPoint(21.530328043065865, -104.87032804975897)
-                calle.posicion2 = GeoPoint(21.529312552676323, -104.86834053295763)
-            posicion.add(calle)
-                val gym = Data()
-                gym.nombre = "oasis"
-                gym.posicion1 = GeoPoint(21.530419045174373, -104.8717216020518)
-                gym.posicion2 = GeoPoint(21.530332965851965, -104.87159553823422)
-            posicion.add(gym)
-                val gym2 = Data()
-                gym2.nombre = "mac store"
-                gym2.posicion1 = GeoPoint(21.530320490583627, -104.87173501309623)
-                gym2.posicion2 = GeoPoint(21.530193242785245, -104.87159687933865)
-            posicion.add(gym2)
+
         }
 
         locacion = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -161,8 +127,10 @@ class MainActivity : AppCompatActivity() {
         var adapter = AdapterSlider(imgs,this)
 
         pager.adapter = adapter
-
-        tv_title.setText(item.nombre)
+        val cadena = item.nombre.toString()
+        val upperCamelCase = cadena.substring(0,1).uppercase()+cadena.substring(1)
+        tv_title.setText(upperCamelCase)
+        tv_descr.setText(item.descripcion)
 
         builder.setView(v)
             .setPositiveButton("OK",
@@ -216,26 +184,50 @@ class Oyente(puntero: MainActivity): LocationListener{
     override fun onLocationChanged(location: Location) {
         p.binding.tvPosition.setText("${location.latitude}, ${location.longitude}")
         var geoPosicionGPS = GeoPoint(location.latitude, location.longitude)
+        Log.i("Position","${location.latitude}, ${location.longitude}")
+        var esta = false
 
         for(item in p.posicion){
             if(item.estoyEn(geoPosicionGPS)){
-            Log.i("#### item", item.toString())
+                esta = true
+            //Log.i("#### item", item.toString())
                 p.binding.tvPlace.setText("Estas en ${item.nombre}")
                 p.binding.tvAdvise.visibility = View.VISIBLE
                 when(item.nombre){
-                    "oasis" ->item.img = R.drawable.oasis_1
-                    "play city" ->item.img = R.drawable.play_1
-                    "liverpool" ->item.img = R.drawable.liver_1
-                    "cinemex" ->item.img = R.drawable.cine_1
-                    "recorcholis" ->item.img = R.drawable.recocholis_1
-                    "mac store" ->item.img = R.drawable.mac_1
+                    "oasis" ->item.img = R.drawable.oasis
+                    "play city" ->item.img = R.drawable.play
+                    "liverpool" ->item.img = R.drawable.liver
+                    "cinemex" ->item.img = R.drawable.cine
+                    "recorcholis" ->item.img = R.drawable.recocholis
+                    "mac store" ->item.img = R.drawable.mac
                 }
                 p.binding.imageViewPlace.setImageResource(item.img)
                 p.binding.imageViewPlace.setOnClickListener {
                     p.mostrarInfo(item)
                 }
+            }else{
+             Log.i("##","No estás en ningun lugar específico")
+               /* p.binding.tvPlace.setText("Estas en Forum")
+                p.binding.imageViewPlace.setImageResource(R.drawable.forum)
+                p.binding.imageViewPlace.setOnClickListener {
+                    Toast.makeText(p.baseContext,
+             Log.i("##","No estás en ningun lugar específico")
+                }*/
             }
         }
+        if(esta)
+            Log.i("##","Estás en un lugar específico")
+        else {
+            p.binding.tvPlace.setText("Estas en Forum")
+            p.binding.tvAdvise.visibility = View.VISIBLE
+            p.binding.tvAdvise.setText("Sigue caminando")
+            p.binding.imageViewPlace.setImageResource(R.drawable.forum)
+            p.binding.imageViewPlace.setOnClickListener {
+                Toast.makeText(p.baseContext,"Sigue caminando", Toast.LENGTH_SHORT).show()
+                    Log.i("##","No estás en ningun lugar específico")
+            }
+        }
+
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {

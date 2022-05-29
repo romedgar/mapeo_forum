@@ -6,6 +6,7 @@ class Data {
     var nombre : String = ""
     var posicion1 : GeoPoint = GeoPoint(0.0,0.0)
     var posicion2 : GeoPoint = GeoPoint(0.0,0.0)
+    var descripcion = ""
     var img = 0
 
     override fun toString(): String {
